@@ -2,6 +2,8 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:trab_mobile_pos/model/client.dart';
+import 'package:trab_mobile_pos/repositories/client_repository.dart';
 
 class CreateClientPage extends StatelessWidget {
   CreateClientPage({Key? key}) : super(key: key);
@@ -43,7 +45,7 @@ class CreateClientPage extends StatelessWidget {
                   maxLength: 80,
                   decoration: new InputDecoration(hintText: 'Sobrenome'),
                   validator: (value) {
-                    if (value!.isEmpty) {
+                    if (value!.isEmpty || value == null) {
                       return 'Campo não pode ser vazio';
                     }
                     return null;
@@ -61,7 +63,7 @@ class CreateClientPage extends StatelessWidget {
                 MaterialButton(
                   minWidth: double.maxFinite, // set minWidth to maxFinite
                   color: Colors.green,
-                  onPressed: () {},
+                  onPressed: _save,
                   child: Text(
                     'Salvar',
                     style: TextStyle(color: Colors.white, fontSize: 17),
@@ -71,5 +73,10 @@ class CreateClientPage extends StatelessWidget {
             ),
           )),
     );
+  }
+
+  void _save() async {
+    Client newClient = Client.novo(name.text, lastName.text, cpf.text);
+    await ClientRepository().create(newClient);
   }
 }
