@@ -1,11 +1,14 @@
 import 'package:trab_mobile_pos/model/client.dart';
-import 'package:trab_mobile_pos/repositories/client_repository_interface.dart';
+import 'package:trab_mobile_pos/rest/client_rest.dart';
+
+import 'client_repository_interface.dart';
 
 class ClientRepository implements IClientRepository {
+  final ClientRest api = ClientRest();
+
   @override
-  Future<Client> create(Client client) {
-    // TODO: implement create
-    throw UnimplementedError();
+  Future<Client> create(Client client) async {
+    return await api.create(client);
   }
 
   @override
@@ -15,9 +18,8 @@ class ClientRepository implements IClientRepository {
   }
 
   @override
-  Future<List<Client>> getAll() {
-    // TODO: implement getAll
-    throw UnimplementedError();
+  Future<List<Client>> getAll() async {
+    return await api.getAll();
   }
 
   @override

@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:trab_mobile_pos/view/client/list_cllient_page.dart';
+import 'package:trab_mobile_pos/view/product/list_page.dart';
 
-void main() {
+void main() async {
+  await dotenv.load();
   runApp(MyApp());
 }
 
@@ -35,7 +38,6 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
         tabBuilder: (BuildContext context, int index) {
-          print(index);
           switch (index) {
             case 0:
               return CupertinoTabView(
@@ -69,6 +71,17 @@ class MyHomePage extends StatelessWidget {
                           );
                         },
                       ),
+                    ),
+                  );
+                },
+              );
+
+            case 2:
+              return CupertinoTabView(
+                builder: (BuildContext context) {
+                  return CupertinoPageScaffold(
+                    child: ListProductPage(
+                      title: "Teste",
                     ),
                   );
                 },

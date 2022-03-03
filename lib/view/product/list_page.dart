@@ -1,26 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cupertino_listview/cupertino_listview.dart';
-import 'package:trab_mobile_pos/model/client.dart';
-import 'package:trab_mobile_pos/repositories/client/client_repository.dart';
-import 'package:trab_mobile_pos/view/client/create_client_page.dart';
+import 'package:trab_mobile_pos/model/product.dart';
+import 'package:trab_mobile_pos/repositories/product/product_repository.dart';
 
-class ListClientPage extends StatefulWidget {
-  ListClientPage({Key? key, required this.title}) : super(key: key);
+import 'create_page.dart';
+
+class ListProductPage extends StatefulWidget {
+  ListProductPage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State createState() => _ListClientPageState();
+  State createState() => _ListProductPage();
 }
 
-class _ListClientPageState extends State<ListClientPage> {
-  // final _data = Section.allData();
-
-  List<Client> clients = [];
+class _ListProductPage extends State<ListProductPage> {
+  List<Product> products = [];
 
   late final ScrollController _scrollController;
-  final ClientRepository clientRepository = ClientRepository();
+  final ProductRepository productRepository = ProductRepository();
 
   @override
   void initState() {
@@ -38,11 +37,11 @@ class _ListClientPageState extends State<ListClientPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Clientes")),
+      appBar: AppBar(title: Text("Produtos")),
       body: CupertinoListView.builder(
         padding: new EdgeInsets.all(20.0),
         sectionCount: 1,
-        itemInSectionCount: (section) => clients.length,
+        itemInSectionCount: (section) => products.length,
         sectionBuilder: _buildSection,
         childBuilder: _buildItem,
         separatorBuilder: _buildSeparator,
@@ -54,7 +53,7 @@ class _ListClientPageState extends State<ListClientPage> {
           child: Icon(Icons.add),
           onPressed: () {
             Navigator.push(context,
-                CupertinoPageRoute(builder: (context) => CreateClientPage()));
+                CupertinoPageRoute(builder: (context) => CreateProductPage()));
           },
         ),
       ),
@@ -77,7 +76,8 @@ class _ListClientPageState extends State<ListClientPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-              child: Text(clients[index.child].name as String), width: 120.0),
+              child: Text(products[index.child].description as String),
+              width: 120.0),
           Spacer(),
           PopupMenuButton(
             itemBuilder: (context) {
@@ -99,10 +99,10 @@ class _ListClientPageState extends State<ListClientPage> {
   }
 
   Future getAllClients() async {
-    final clientsFromRepository = await clientRepository.getAll();
+    final productsFromRepository = await productRepository.getAll();
 
     setState(() {
-      clients = clientsFromRepository;
+      products = productsFromRepository;
     });
   }
 }

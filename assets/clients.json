@@ -1,0 +1,58 @@
+{
+  "clients": [
+    {
+      "id": "1",
+      "name": "Vanderson",
+      "lastName": "Mantovani",
+      "cpf": "123"
+    },
+    {
+      "id": "2",
+      "name": "Pedro",
+      "lastName": "Silva",
+      "cpf": "456"
+    },
+    {
+      "id": "3",
+      "name": "João",
+      "lastName": "Pedro",
+      "cpf": "789"
+    },
+    {
+      "id": "4",
+      "name": "Daniel",
+      "lastName": "Costa",
+      "cpf": "101"
+    },
+    {
+      "id": "5",
+      "name": "Ronaldo",
+      "lastName": "Silva",
+      "cpf": "102"
+    },
+    {
+      "id": "6",
+      "name": "Novo",
+      "lastName": "Novo cliente",
+      "cpf": "787"
+    },
+    {
+      "id": "7",
+      "name": "Testeeeee",
+      "lastName": "dawawdwdwadwadwadwadwa",
+      "cpf": "22222"
+    },
+    {
+      "id": "8",
+      "name": "new member",
+      "lastName": "novo membro",
+      "cpf": "2525"
+    },
+    {
+      "id": 9,
+      "name": "cadastro ",
+      "lastName": "feito pelo app",
+      "cpf": "106.347.229-64"
+    }
+  ]
+}

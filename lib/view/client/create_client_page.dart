@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trab_mobile_pos/model/client.dart';
-import 'package:trab_mobile_pos/repositories/client_repository.dart';
+import 'package:trab_mobile_pos/repositories/client/client_repository.dart';
 
 class CreateClientPage extends StatelessWidget {
   CreateClientPage({Key? key}) : super(key: key);
