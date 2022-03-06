@@ -21,7 +21,7 @@ class ProductRest {
   }
 
   Future<Product> create(Product client) async {
-    var url = Uri.parse('${Config.baseUrl}/clients');
+    var url = Uri.parse('${Config.baseUrl}/products');
     http.Response? response;
 
     try {
@@ -35,7 +35,7 @@ class ProductRest {
         return Product.fromJson(response.body);
       }
 
-      throw Exception("Error create client!");
+      throw Exception("Error create product!");
     } catch (error) {
       throw error;
     }

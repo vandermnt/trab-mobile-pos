@@ -7,8 +7,7 @@ class ProductRepository implements IProductRepository {
 
   @override
   Future<Product> create(Product produtc) {
-    // TODO: implement create
-    throw UnimplementedError();
+    return api.create(produtc);
   }
 
   @override

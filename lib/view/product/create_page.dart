@@ -45,7 +45,7 @@ class CreateProductPage extends StatelessWidget {
                     'Salvar',
                     style: TextStyle(color: Colors.white, fontSize: 17),
                   ),
-                )
+                ),
               ],
             ),
           )),
