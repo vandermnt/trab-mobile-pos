@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:trab_mobile_pos/view/client/list_cllient_page.dart';
+import 'package:trab_mobile_pos/view/order/list_page.dart';
 import 'package:trab_mobile_pos/view/product/list_page.dart';
 
 void main() async {
@@ -28,76 +29,57 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
-        tabBar: CupertinoTabBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_cart), label: "Pedidos"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.person), label: "Clientes"),
-            BottomNavigationBarItem(icon: Icon(Icons.folder), label: "Produtos")
-          ],
-        ),
-        tabBuilder: (BuildContext context, int index) {
-          switch (index) {
-            case 0:
-              return CupertinoTabView(
-                builder: (BuildContext context) {
-                  return CupertinoPageScaffold(
-                    navigationBar: CupertinoNavigationBar(
-                      middle: Text('Page 1 of tab $index'),
-                    ),
-                    child: Center(
-                      child: CupertinoButton(
-                        child: const Text('Next page'),
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            CupertinoPageRoute<void>(
-                              builder: (BuildContext context) {
-                                return CupertinoPageScaffold(
-                                  navigationBar: CupertinoNavigationBar(
-                                    middle: Text('Page 2 of tab $index'),
-                                  ),
-                                  child: Center(
-                                    child: CupertinoButton(
-                                      child: const Text('Back'),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  );
-                },
-              );
+      tabBar: CupertinoTabBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart), label: "Pedidos"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Clientes"),
+          BottomNavigationBarItem(icon: Icon(Icons.folder), label: "Produtos")
+        ],
+      ),
+      tabBuilder: (BuildContext context, int index) {
+        switch (index) {
+          case 0:
+            return CupertinoTabView(
+              builder: (BuildContext context) {
+                return CupertinoPageScaffold(
+                  child: ListOrderPage(title: "Pedidos"),
+                );
+              },
+            );
 
-            case 2:
-              return CupertinoTabView(
-                builder: (BuildContext context) {
-                  return CupertinoPageScaffold(
-                    child: ListProductPage(
-                      title: "Teste",
-                    ),
-                  );
-                },
-              );
+          case 1:
+            return CupertinoTabView(
+              builder: (BuildContext context) {
+                return CupertinoPageScaffold(
+                  child: ListClientPage(
+                    title: "Clientes",
+                  ),
+                );
+              },
+            );
 
-            default:
-              return CupertinoTabView(
-                builder: (BuildContext context) {
-                  return CupertinoPageScaffold(
-                    child: ListClientPage(
-                      title: "Teste",
-                    ),
-                  );
-                },
-              );
-          }
-        });
+          case 2:
+            return CupertinoTabView(
+              builder: (BuildContext context) {
+                return CupertinoPageScaffold(
+                  child: ListProductPage(
+                    title: "Produtos",
+                  ),
+                );
+              },
+            );
+
+          default:
+            return CupertinoTabView(
+              builder: (BuildContext context) {
+                return CupertinoPageScaffold(
+                  child: ListOrderPage(title: "Pedidos"),
+                );
+              },
+            );
+        }
+      },
+    );
   }
 }

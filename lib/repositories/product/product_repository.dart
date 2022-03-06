@@ -1,9 +1,9 @@
 import 'package:trab_mobile_pos/model/product.dart';
 import 'package:trab_mobile_pos/repositories/product/product_repository_interface.dart';
-import 'package:trab_mobile_pos/rest/client_rest.dart';
+import 'package:trab_mobile_pos/rest/product_rest.dart';
 
 class ProductRepository implements IProductRepository {
-  final ClientRest api = ClientRest();
+  final ProductRest api = ProductRest();
 
   @override
   Future<Product> create(Product produtc) {
@@ -18,9 +18,8 @@ class ProductRepository implements IProductRepository {
   }
 
   @override
-  Future<List<Product>> getAll() {
-    // TODO: implement getAll
-    throw UnimplementedError();
+  Future<List<Product>> getAll() async {
+    return await api.getAll();
   }
 
   @override
