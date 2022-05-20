@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:trab_mobile_pos/view/client/list_cllient_page.dart';
-import 'package:trab_mobile_pos/view/order/list_page.dart';
+import 'package:trab_mobile_pos/view/order/list_order_page.dart';
 import 'package:trab_mobile_pos/view/product/list_page.dart';
 
 void main() async {

@@ -24,7 +24,7 @@ class _ListProductPage extends State<ListProductPage> {
   @override
   void initState() {
     super.initState();
-    this.getAllClients();
+    this.getAllProducts();
     _scrollController = ScrollController();
   }
 
@@ -87,10 +87,8 @@ class _ListProductPage extends State<ListProductPage> {
               ];
             },
             onSelected: (String value) {
-              if (value == 'edit')
-                print("teste");
-              else
-                print("teste");
+              if (value == 'edit') {}
+              if (value == 'delete') delete(products[index.child].id);
             },
           )
         ],
@@ -98,11 +96,16 @@ class _ListProductPage extends State<ListProductPage> {
     );
   }
 
-  Future getAllClients() async {
+  Future getAllProducts() async {
     final productsFromRepository = await productRepository.getAll();
-
     setState(() {
       products = productsFromRepository;
     });
+  }
+
+  Future delete(productId) async {
+    await productRepository.delete(productId);
+
+    await getAllProducts();
   }
 }

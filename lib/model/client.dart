@@ -15,7 +15,7 @@ class Client {
 
   static Client fromMap(Map<String, dynamic> map) {
     return Client(
-      map[1],
+      map["id"],
       map['name'],
       map['lastName'],
       map['cpf'],

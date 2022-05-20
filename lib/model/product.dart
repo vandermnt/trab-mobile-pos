@@ -11,7 +11,7 @@ class Product {
 
   static Product fromMap(Map<String, dynamic> map) {
     return Product(
-      map[1],
+      map["id"],
       map['description'],
     );
   }

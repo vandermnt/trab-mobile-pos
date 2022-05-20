@@ -5,5 +5,5 @@ abstract class IClientRepository {
   Future<Client> getClientById();
   Future<Client> create(Client client);
   Future<Client> update(Client client);
-  Future<Client> delete(Client client);
+  Future<void> delete(int client);
 }

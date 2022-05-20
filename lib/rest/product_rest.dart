@@ -4,11 +4,6 @@ import 'package:trab_mobile_pos/shared/config.dart';
 
 class ProductRest {
   Future<List<Product>> getAll() async {
-    try {
-      print(Config.baseUrl);
-    } catch (error) {
-      print(error);
-    }
     var url = Uri.parse('${Config.baseUrl}/products');
     http.Response? response;
 
@@ -36,6 +31,28 @@ class ProductRest {
       }
 
       throw Exception("Error create product!");
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<void> delete(int productId) async {
+    var url = Uri.parse('${Config.baseUrl}/products/$productId');
+    http.Response? response;
+
+    try {
+      response = await http.delete(
+        url,
+        headers: <String, String>{
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      );
+
+      if (response.statusCode == 200) {
+        return;
+      }
+
+      throw Exception("Error delete product!");
     } catch (error) {
       throw error;
     }

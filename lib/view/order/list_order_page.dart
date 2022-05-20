@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cupertino_listview/cupertino_listview.dart';
 import 'package:trab_mobile_pos/model/order.dart';
 import 'package:trab_mobile_pos/repositories/order/order_repository.dart';
-import 'package:trab_mobile_pos/view/client/create_client_page.dart';
+import 'package:trab_mobile_pos/view/order/create_order_page.dart';
 
 class ListOrderPage extends StatefulWidget {
   ListOrderPage({Key? key, required this.title}) : super(key: key);
@@ -25,7 +25,6 @@ class _ListOrderPage extends State<ListOrderPage> {
   @override
   void initState() {
     super.initState();
-    this.getAllClients();
     _scrollController = ScrollController();
   }
 
@@ -54,7 +53,7 @@ class _ListOrderPage extends State<ListOrderPage> {
           child: Icon(Icons.add),
           onPressed: () {
             Navigator.push(context,
-                CupertinoPageRoute(builder: (context) => CreateClientPage()));
+                CupertinoPageRoute(builder: (context) => CreateOrderPage()));
           },
         ),
       ),
@@ -86,23 +85,10 @@ class _ListOrderPage extends State<ListOrderPage> {
                 PopupMenuItem(value: 'delete', child: Text('Remover'))
               ];
             },
-            onSelected: (String value) {
-              if (value == 'edit')
-                print("teste");
-              else
-                print("teste");
-            },
+            onSelected: (String value) {},
           )
         ],
       ),
     );
-  }
-
-  Future getAllClients() async {
-    // final clientsFromRepository = await orderRepository.getAll();
-
-    // setState(() {
-    //   clients = clientsFromRepository;
-    // });
   }
 }

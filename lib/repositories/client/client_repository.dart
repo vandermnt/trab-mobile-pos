@@ -12,9 +12,8 @@ class ClientRepository implements IClientRepository {
   }
 
   @override
-  Future<Client> delete(Client client) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<void> delete(int clientId) {
+    return api.delete(clientId);
   }
 
   @override

@@ -4,11 +4,6 @@ import 'package:trab_mobile_pos/shared/config.dart';
 
 class ClientRest {
   Future<List<Client>> getAll() async {
-    try {
-      print(Config.baseUrl);
-    } catch (error) {
-      print(error);
-    }
     var url = Uri.parse('${Config.baseUrl}/clients');
     http.Response? response;
 
@@ -36,6 +31,28 @@ class ClientRest {
       }
 
       throw Exception("Error create client!");
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<void> delete(int clientId) async {
+    var url = Uri.parse('${Config.baseUrl}/clients/$clientId');
+    http.Response? response;
+
+    try {
+      response = await http.delete(
+        url,
+        headers: <String, String>{
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      );
+
+      if (response.statusCode == 200) {
+        return;
+      }
+
+      throw Exception("Error delete client!");
     } catch (error) {
       throw error;
     }

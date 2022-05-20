@@ -6,14 +6,13 @@ class ProductRepository implements IProductRepository {
   final ProductRest api = ProductRest();
 
   @override
-  Future<Product> create(Product produtc) {
-    return api.create(produtc);
+  Future<Product> create(Product product) {
+    return api.create(product);
   }
 
   @override
-  Future<Product> delete(Product produtc) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<void> delete(int productId) {
+    return api.delete(productId);
   }
 
   @override

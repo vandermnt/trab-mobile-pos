@@ -8,6 +8,7 @@ import 'package:trab_mobile_pos/repositories/client/client_repository.dart';
 class CreateClientPage extends StatelessWidget {
   CreateClientPage({Key? key}) : super(key: key);
 
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController name = TextEditingController();
   final TextEditingController lastName = TextEditingController();
   final TextEditingController cpf = TextEditingController();
@@ -27,6 +28,7 @@ class CreateClientPage extends StatelessWidget {
       body: Container(
           margin: new EdgeInsets.all(30.0), // Or set whatever you want
           child: Form(
+            key: _formKey,
             child: Column(
               children: [
                 TextFormField(
@@ -34,8 +36,8 @@ class CreateClientPage extends StatelessWidget {
                   decoration: new InputDecoration(hintText: 'Nome'),
                   maxLength: 40,
                   validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Campo não pode ser vazio';
+                    if (value == null || value.isEmpty) {
+                      return 'Campo não pode ser vazio!';
                     }
                     return null;
                   },
@@ -45,7 +47,7 @@ class CreateClientPage extends StatelessWidget {
                   maxLength: 80,
                   decoration: new InputDecoration(hintText: 'Sobrenome'),
                   validator: (value) {
-                    if (value!.isEmpty || value == null) {
+                    if (value == null || value.isEmpty) {
                       return 'Campo não pode ser vazio';
                     }
                     return null;
@@ -63,7 +65,11 @@ class CreateClientPage extends StatelessWidget {
                 MaterialButton(
                   minWidth: double.maxFinite, // set minWidth to maxFinite
                   color: Colors.green,
-                  onPressed: _save,
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _save();
+                    }
+                  },
                   child: Text(
                     'Salvar',
                     style: TextStyle(color: Colors.white, fontSize: 17),

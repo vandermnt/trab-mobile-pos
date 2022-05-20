@@ -87,10 +87,8 @@ class _ListClientPageState extends State<ListClientPage> {
               ];
             },
             onSelected: (String value) {
-              if (value == 'edit')
-                print("teste");
-              else
-                print("teste");
+              if (value == 'edit') {}
+              if (value == 'delete') delete(clients[index.child].id);
             },
           )
         ],
@@ -104,5 +102,11 @@ class _ListClientPageState extends State<ListClientPage> {
     setState(() {
       clients = clientsFromRepository;
     });
+  }
+
+  Future delete(clientId) async {
+    await clientRepository.delete(clientId);
+
+    await getAllClients();
   }
 }
