@@ -1,11 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:trab_mobile_pos/model/product.dart';
 import 'package:trab_mobile_pos/repositories/product/product_repository.dart';
 
-class CreateProductPage extends StatelessWidget {
+class CreateProductPage extends StatefulWidget {
   CreateProductPage({Key? key}) : super(key: key);
 
+  @override
+  State<StatefulWidget> createState() => _CreateProductPageState();
+}
+
+class _CreateProductPageState extends State<CreateProductPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController description = TextEditingController();
   final ButtonStyle flatButtonStyle = TextButton.styleFrom(
@@ -61,5 +65,11 @@ class CreateProductPage extends StatelessWidget {
   void _save() async {
     Product newProduct = Product.novo(description.text);
     await ProductRepository().create(newProduct);
+
+    _returnToPageList();
+  }
+
+  void _returnToPageList() {
+    Navigator.pop(context);
   }
 }
