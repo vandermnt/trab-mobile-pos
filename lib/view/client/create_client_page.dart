@@ -1,13 +1,17 @@
 import 'package:brasil_fields/brasil_fields.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trab_mobile_pos/model/client.dart';
 import 'package:trab_mobile_pos/repositories/client/client_repository.dart';
 
-class CreateClientPage extends StatelessWidget {
+class CreateClientPage extends StatefulWidget {
   CreateClientPage({Key? key}) : super(key: key);
 
+  @override
+  State<StatefulWidget> createState() => _CreateClientPageState();
+}
+
+class _CreateClientPageState extends State<CreateClientPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController name = TextEditingController();
   final TextEditingController lastName = TextEditingController();
@@ -84,5 +88,11 @@ class CreateClientPage extends StatelessWidget {
   void _save() async {
     Client newClient = Client.novo(name.text, lastName.text, cpf.text);
     await ClientRepository().create(newClient);
+
+    _returnToPageList();
+  }
+
+  void _returnToPageList() {
+    Navigator.pop(context);
   }
 }

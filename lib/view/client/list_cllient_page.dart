@@ -15,8 +15,6 @@ class ListClientPage extends StatefulWidget {
 }
 
 class _ListClientPageState extends State<ListClientPage> {
-  // final _data = Section.allData();
-
   List<Client> clients = [];
 
   late final ScrollController _scrollController;
@@ -53,8 +51,11 @@ class _ListClientPageState extends State<ListClientPage> {
         child: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
-            Navigator.push(context,
-                CupertinoPageRoute(builder: (context) => CreateClientPage()));
+            Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                        builder: (context) => CreateClientPage()))
+                .then((value) => getAllClients());
           },
         ),
       ),
@@ -77,7 +78,10 @@ class _ListClientPageState extends State<ListClientPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-              child: Text(clients[index.child].name as String), width: 120.0),
+              child: Text(clients[index.child].name! +
+                  ' ' +
+                  clients[index.child].lastName!),
+              width: 120.0),
           Spacer(),
           PopupMenuButton(
             itemBuilder: (context) {
