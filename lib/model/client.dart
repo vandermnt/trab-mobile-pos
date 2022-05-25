@@ -6,7 +6,7 @@ class Client {
   String? name;
   String? lastName;
 
-  Client(this.id, this.cpf, this.name, this.lastName);
+  Client(this.id, this.name, this.lastName, this.cpf);
   Client.novo(String name, String lastName, String cpf) {
     this.name = name;
     this.lastName = lastName;
@@ -15,7 +15,7 @@ class Client {
 
   static Client fromMap(Map<String, dynamic> map) {
     return Client(
-      map["id"],
+      map['id'],
       map['name'],
       map['lastName'],
       map['cpf'],
