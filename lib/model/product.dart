@@ -16,10 +16,15 @@ class Product {
     );
   }
 
-  static toJson(Product client) {
-    return jsonEncode({
-      "description": client.description,
-    });
+  static String toJson(Product product) {
+    return jsonEncode(toObject(product));
+  }
+
+  static toObject(Product product) {
+    return {
+      "id": product.id,
+      "description": product.description,
+    };
   }
 
   static List<Product> fromMaps(List<Map<String, dynamic>> maps) {

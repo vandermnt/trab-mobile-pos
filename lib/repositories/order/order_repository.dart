@@ -1,28 +1,24 @@
-import 'package:trab_mobile_pos/model/client.dart';
 import 'package:trab_mobile_pos/model/order.dart';
-import 'package:trab_mobile_pos/rest/client_rest.dart';
+import 'package:trab_mobile_pos/rest/order_rest.dart';
 
 import 'order_repository_interface.dart';
 
 class OrderRepository implements IOrderRepository {
-  final ClientRest api = ClientRest();
+  final OrderRest api = OrderRest();
 
   @override
-  Future<Order> create(Order client) {
-    // TODO: implement create
-    throw UnimplementedError();
+  Future<Order> create(Order client) async {
+    return await api.create(client);
   }
 
   @override
-  Future<Order> delete(Order client) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<void> delete(Order order) async {
+    return await api.delete(order.id!);
   }
 
   @override
-  Future<List<Order>> getAll() {
-    // TODO: implement getAll
-    throw UnimplementedError();
+  Future<List<Order>> getAll() async {
+    return await api.getAll();
   }
 
   @override

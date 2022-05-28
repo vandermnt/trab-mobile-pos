@@ -15,6 +15,18 @@ class ClientRest {
     }
   }
 
+  Future<Client> getByCpf(String cpf) async {
+    var url = Uri.parse('${Config.baseUrl}/clients/cpf/$cpf');
+    http.Response? response;
+
+    try {
+      response = await http.get(url);
+      return Client.fromJson(response.body);
+    } catch (error) {
+      throw error;
+    }
+  }
+
   Future<Client> create(Client client) async {
     var url = Uri.parse('${Config.baseUrl}/clients');
     http.Response? response;

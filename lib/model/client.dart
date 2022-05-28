@@ -23,8 +23,16 @@ class Client {
   }
 
   static toJson(Client client) {
-    return jsonEncode(
-        {"name": client.name, "lastName": client.lastName, "cpf": client.cpf});
+    return jsonEncode(toObject(client));
+  }
+
+  static toObject(Client client) {
+    return {
+      "id": client.id,
+      "name": client.name,
+      "lastName": client.lastName,
+      "cpf": client.cpf
+    };
   }
 
   static List<Client> fromMaps(List<Map<String, dynamic>> maps) {

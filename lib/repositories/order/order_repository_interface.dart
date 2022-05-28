@@ -5,5 +5,5 @@ abstract class IOrderRepository {
   Future<Order> getClientById();
   Future<Order> create(Order client);
   Future<Order> update(Order client);
-  Future<Order> delete(Order client);
+  Future<void> delete(Order client);
 }

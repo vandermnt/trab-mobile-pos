@@ -86,7 +86,9 @@ class _CreateClientPageState extends State<CreateClientPage> {
   }
 
   void _save() async {
-    Client newClient = Client.novo(name.text, lastName.text, cpf.text);
+    var numeroCpf = UtilBrasilFields.removeCaracteres(cpf.text);
+
+    Client newClient = Client.novo(name.text, lastName.text, numeroCpf);
     await ClientRepository().create(newClient);
 
     _returnToPageList();

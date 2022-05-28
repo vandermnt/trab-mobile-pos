@@ -1,30 +1,42 @@
 import 'dart:convert';
+import 'package:trab_mobile_pos/model/client.dart';
+import 'package:trab_mobile_pos/model/order_item.dart';
 
 class Order {
   int? id;
-  String? cpf;
-  String? name;
-  String? lastName;
+  DateTime? date;
+  Client? client;
+  List<OrderItem>? items;
 
-  Order(this.id, this.cpf, this.name, this.lastName);
-  Order.novo(String name, String lastName, String cpf) {
-    this.name = name;
-    this.lastName = lastName;
-    this.cpf = cpf;
+  Order(this.id, this.date, this.client, this.items);
+  Order.novo(DateTime date, Client client, List<OrderItem> items) {
+    this.date = date;
+    this.client = client;
+    this.items = items;
   }
 
   static Order fromMap(Map<String, dynamic> map) {
+    var client = Client.fromMap(map['client']);
+    var items = OrderItem.fromMaps(map['items']);
+
     return Order(
-      map[1],
-      map['name'],
-      map['lastName'],
-      map['cpf'],
+      map['id'],
+      DateTime.parse(map['date']),
+      client,
+      items,
     );
   }
 
-  static toJson(Order client) {
-    return jsonEncode(
-        {"name": client.name, "lastName": client.lastName, "cpf": client.cpf});
+  static toJson(Order order) {
+    var client = Client.toObject(order.client!);
+    var items = order.items!.map((item) => OrderItem.toObject(item)).toList();
+
+    return jsonEncode({
+      "id": order.id,
+      "date": order.date?.toIso8601String(),
+      "client": client,
+      "items": items
+    });
   }
 
   static List<Order> fromMaps(List<Map<String, dynamic>> maps) {

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:cupertino_listview/cupertino_listview.dart';
 import 'package:trab_mobile_pos/model/order.dart';
 import 'package:trab_mobile_pos/repositories/order/order_repository.dart';
@@ -15,9 +16,7 @@ class ListOrderPage extends StatefulWidget {
 }
 
 class _ListOrderPage extends State<ListOrderPage> {
-  // final _data = Section.allData();
-
-  List<Order> clients = [];
+  List<Order> orders = [];
 
   late final ScrollController _scrollController;
   final OrderRepository orderRepository = OrderRepository();
@@ -25,6 +24,7 @@ class _ListOrderPage extends State<ListOrderPage> {
   @override
   void initState() {
     super.initState();
+    getAllOrders();
     _scrollController = ScrollController();
   }
 
@@ -41,7 +41,7 @@ class _ListOrderPage extends State<ListOrderPage> {
       body: CupertinoListView.builder(
         padding: new EdgeInsets.all(20.0),
         sectionCount: 1,
-        itemInSectionCount: (section) => clients.length,
+        itemInSectionCount: (section) => orders.length,
         sectionBuilder: _buildSection,
         childBuilder: _buildItem,
         separatorBuilder: _buildSeparator,
@@ -53,7 +53,8 @@ class _ListOrderPage extends State<ListOrderPage> {
           child: Icon(Icons.add),
           onPressed: () {
             Navigator.push(context,
-                CupertinoPageRoute(builder: (context) => CreateOrderPage()));
+                    CupertinoPageRoute(builder: (context) => CreateOrderPage()))
+                .then((value) => getAllOrders());
           },
         ),
       ),
@@ -76,19 +77,41 @@ class _ListOrderPage extends State<ListOrderPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-              child: Text(clients[index.child].name as String), width: 120.0),
+              child: ListTile(
+                title: Text('#' +
+                    orders[index.child].id.toString() +
+                    ' - ' +
+                    orders[index.child].client!.name! +
+                    ' ' +
+                    orders[index.child].client!.lastName!),
+                subtitle: Text(DateFormat('dd/MM/yyyy HH:mm')
+                    .format(orders[index.child].date!)),
+              ),
+              width: 300.0),
           Spacer(),
           PopupMenuButton(
             itemBuilder: (context) {
-              return [
-                PopupMenuItem(value: 'edit', child: Text('Editar')),
-                PopupMenuItem(value: 'delete', child: Text('Remover'))
-              ];
+              return [PopupMenuItem(value: 'delete', child: Text('Remover'))];
             },
-            onSelected: (String value) {},
+            onSelected: (String value) {
+              if (value == 'delete') deleteOrder(orders[index.child]);
+            },
           )
         ],
       ),
     );
+  }
+
+  Future getAllOrders() async {
+    final ordersFromRepository = await orderRepository.getAll();
+    setState(() {
+      orders = ordersFromRepository;
+    });
+  }
+
+  Future<void> deleteOrder(Order orderId) async {
+    await orderRepository.delete(orderId);
+
+    await getAllOrders();
   }
 }
