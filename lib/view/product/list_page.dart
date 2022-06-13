@@ -52,8 +52,11 @@ class _ListProductPage extends State<ListProductPage> {
         child: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
-            Navigator.push(context,
-                CupertinoPageRoute(builder: (context) => CreateProductPage()));
+            Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                        builder: (context) => CreateProductPage()))
+                .then((value) => getAllProducts());
           },
         ),
       ),
