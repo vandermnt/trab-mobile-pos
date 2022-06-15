@@ -15,7 +15,7 @@ class ProductRest {
     }
   }
 
-  Future<Product> create(Product client) async {
+  Future<Product> create(Product product) async {
     var url = Uri.parse('${Config.baseUrl}/products');
     http.Response? response;
 
@@ -24,7 +24,7 @@ class ProductRest {
           headers: <String, String>{
             "Content-Type": "application/json; charset=UTF-8",
           },
-          body: Product.toJson(client));
+          body: Product.toJson(product));
 
       if (response.statusCode == 201) {
         return Product.fromJson(response.body);
@@ -53,6 +53,27 @@ class ProductRest {
       }
 
       throw Exception("Error delete product!");
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<void> update(Product product) async {
+    var url = Uri.parse('${Config.baseUrl}/products/${product.id}');
+    http.Response? response;
+
+    try {
+      response = await http.put(url,
+          headers: <String, String>{
+            "Content-Type": "application/json; charset=UTF-8",
+          },
+          body: Product.toJson(product));
+
+      if (response.statusCode == 200) {
+        return;
+      }
+
+      throw Exception("Error update product!");
     } catch (error) {
       throw error;
     }

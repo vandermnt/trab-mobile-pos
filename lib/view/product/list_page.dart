@@ -5,6 +5,7 @@ import 'package:trab_mobile_pos/model/product.dart';
 import 'package:trab_mobile_pos/repositories/product/product_repository.dart';
 
 import 'create_page.dart';
+import 'edit_page.dart';
 
 class ListProductPage extends StatefulWidget {
   ListProductPage({Key? key, required this.title}) : super(key: key);
@@ -90,7 +91,14 @@ class _ListProductPage extends State<ListProductPage> {
               ];
             },
             onSelected: (String value) {
-              if (value == 'edit') {}
+              if (value == 'edit') {
+                Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                            builder: (context) =>
+                                EditPage(product: products[index.child])))
+                    .then((value) => getAllProducts());
+              }
               if (value == 'delete') delete(products[index.child].id);
             },
           )

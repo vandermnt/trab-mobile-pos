@@ -69,4 +69,25 @@ class ClientRest {
       throw error;
     }
   }
+
+  Future<void> update(Client client) async {
+    var url = Uri.parse('${Config.baseUrl}/clients/${client.id}');
+    http.Response? response;
+
+    try {
+      response = await http.put(url,
+          headers: <String, String>{
+            "Content-Type": "application/json; charset=UTF-8",
+          },
+          body: Client.toJson(client));
+
+      if (response.statusCode == 200) {
+        return;
+      }
+
+      throw Exception("Error update client!");
+    } catch (error) {
+      throw error;
+    }
+  }
 }

@@ -21,14 +21,7 @@ class ProductRepository implements IProductRepository {
   }
 
   @override
-  Future<Product> getProdutcById() {
-    // TODO: implement getProdutcById
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Product> update(Product produtc) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<void> update(Product product) async {
+    return await api.update(product);
   }
 }

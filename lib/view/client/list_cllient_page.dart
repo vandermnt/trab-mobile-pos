@@ -5,6 +5,8 @@ import 'package:trab_mobile_pos/model/client.dart';
 import 'package:trab_mobile_pos/repositories/client/client_repository.dart';
 import 'package:trab_mobile_pos/view/client/create_client_page.dart';
 
+import 'edit_client_page.dart';
+
 class ListClientPage extends StatefulWidget {
   ListClientPage({Key? key, required this.title}) : super(key: key);
 
@@ -91,7 +93,14 @@ class _ListClientPageState extends State<ListClientPage> {
               ];
             },
             onSelected: (String value) {
-              if (value == 'edit') {}
+              if (value == 'edit') {
+                Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                            builder: (context) =>
+                                EditClientPage(client: clients[index.child])))
+                    .then((value) => getAllClients());
+              }
               if (value == 'delete') delete(clients[index.child].id);
             },
           )

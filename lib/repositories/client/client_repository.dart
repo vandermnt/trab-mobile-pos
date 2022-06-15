@@ -32,8 +32,7 @@ class ClientRepository implements IClientRepository {
   }
 
   @override
-  Future<Client> update(Client client) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<void> update(Client client) async {
+    return await api.update(client);
   }
 }
