@@ -65,7 +65,7 @@ class _ListClientPageState extends State<ListClientPage> {
   }
 
   Widget _buildSeparator(BuildContext context, IndexPath index) {
-    return Divider(indent: 20.0, endIndent: 20.0);
+    return Divider(indent: 0, endIndent: 10);
   }
 
   Widget _buildSection(
@@ -83,7 +83,7 @@ class _ListClientPageState extends State<ListClientPage> {
               child: Text(clients[index.child].name! +
                   ' ' +
                   clients[index.child].lastName!),
-              width: 120.0),
+              width: 300.0),
           Spacer(),
           PopupMenuButton(
             itemBuilder: (context) {
@@ -118,7 +118,14 @@ class _ListClientPageState extends State<ListClientPage> {
   }
 
   Future delete(clientId) async {
-    await clientRepository.delete(clientId);
+    try {
+      await clientRepository.delete(clientId);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          behavior: SnackBarBehavior.fixed,
+          content: Text(
+              'Este cliente possui pedidos realizados. Não é possível removê-lo!')));
+    }
 
     await getAllClients();
   }

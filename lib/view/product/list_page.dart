@@ -65,7 +65,7 @@ class _ListProductPage extends State<ListProductPage> {
   }
 
   Widget _buildSeparator(BuildContext context, IndexPath index) {
-    return Divider(indent: 20.0, endIndent: 20.0);
+    return Divider(indent: 0, endIndent: 10.0);
   }
 
   Widget _buildSection(
@@ -81,7 +81,7 @@ class _ListProductPage extends State<ListProductPage> {
         children: [
           SizedBox(
               child: Text(products[index.child].description as String),
-              width: 120.0),
+              width: 300.0),
           Spacer(),
           PopupMenuButton(
             itemBuilder: (context) {
@@ -115,7 +115,14 @@ class _ListProductPage extends State<ListProductPage> {
   }
 
   Future delete(productId) async {
-    await productRepository.delete(productId);
+    try {
+      await productRepository.delete(productId);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          behavior: SnackBarBehavior.fixed,
+          content: Text(
+              'Este produto tem pedidos realizados. Não é possível removê-lo!')));
+    }
 
     await getAllProducts();
   }
