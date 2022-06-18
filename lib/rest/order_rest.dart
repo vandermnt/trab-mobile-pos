@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:trab_mobile_pos/model/order.dart';
 import 'package:http/http.dart' as http;
 import 'package:trab_mobile_pos/shared/config.dart';
@@ -7,6 +5,18 @@ import 'package:trab_mobile_pos/shared/config.dart';
 class OrderRest {
   Future<List<Order>> getAll() async {
     var url = Uri.parse('${Config.baseUrl}/orders');
+    http.Response? response;
+
+    try {
+      response = await http.get(url);
+      return Order.fromJsonList(response.body);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<List<Order>> getAllByCpf(String cpf) async {
+    var url = Uri.parse('${Config.baseUrl}/orders?cpf=$cpf');
     http.Response? response;
 
     try {
