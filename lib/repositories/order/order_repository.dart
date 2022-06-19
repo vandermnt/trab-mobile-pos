@@ -22,14 +22,7 @@ class OrderRepository implements IOrderRepository {
   }
 
   @override
-  Future<Order> getClientById() {
-    // TODO: implement getClientById
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Order> update(Order client) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<List<Order>> getAllByCpf(String cpf) async {
+    return await api.getAllByCpf(cpf);
   }
 }
