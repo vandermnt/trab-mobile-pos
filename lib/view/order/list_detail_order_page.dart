@@ -30,7 +30,7 @@ class _ListDetailOrderPage extends State<ListDetailOrderPage> {
           Text(item.product?.description as String),
         ),
         DataCell(
-          Text(item.quantity as String),
+          Text(item.quantity.toString()),
         ),
       ]));
     });
