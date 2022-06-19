@@ -7,6 +7,7 @@ import 'package:cupertino_listview/cupertino_listview.dart';
 import 'package:trab_mobile_pos/model/order.dart';
 import 'package:trab_mobile_pos/repositories/order/order_repository.dart';
 import 'package:trab_mobile_pos/view/order/create_order_page.dart';
+import 'package:trab_mobile_pos/view/order/list_detail_order_page.dart';
 
 class ListOrderPage extends StatefulWidget {
   ListOrderPage({Key? key, required this.title}) : super(key: key);
@@ -144,9 +145,20 @@ class _ListOrderPage extends State<ListOrderPage> {
           Spacer(),
           PopupMenuButton(
             itemBuilder: (context) {
-              return [PopupMenuItem(value: 'delete', child: Text('Remover'))];
+              return [
+                PopupMenuItem(value: 'view', child: Text('Visualizar')),
+                PopupMenuItem(value: 'delete', child: Text('Remover'))
+              ];
             },
             onSelected: (String value) {
+              if (value == 'view') {
+                Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                            builder: (context) => ListDetailOrderPage(
+                                order: orders[index.child])))
+                    .then((value) => getAllOrders());
+              }
               if (value == 'delete') deleteOrder(orders[index.child]);
             },
           )

@@ -24,14 +24,6 @@ class _EditClientPageState extends State<EditClientPage> {
     this._name = TextEditingController(text: widget.client.name);
     this._lastName = TextEditingController(text: widget.client.lastName);
     this._cpf = TextEditingController(text: widget.client.cpf);
-    final ButtonStyle flatButtonStyle = TextButton.styleFrom(
-      primary: Colors.black87,
-      minimumSize: Size(88, 36),
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(2.0)),
-      ),
-    );
   }
 
   @override
