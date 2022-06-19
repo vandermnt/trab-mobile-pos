@@ -21,12 +21,6 @@ class ClientRepository implements IClientRepository {
     return await api.getAll();
   }
 
-  @override
-  Future<Client> getClientById() {
-    // TODO: implement getClientById
-    throw UnimplementedError();
-  }
-
   Future<Client?> getClientByCpf(String cpf) async {
     return await api.getByCpf(cpf);
   }
